@@ -3,13 +3,13 @@
 <label>holaa client</label>
 <li  v-for ='item in items' :key ='item.uid' class="collection-item">
 <div class="collapsible-header" v-bind:class="{ 'color': item.state, 'c-white': !item.state}">
-<label>{{item.number}}</label>
-<label>Mariana Guerra</label>
-<span class="new badge">0.00</span>
+<label>{{item.value}}</label>
+<label v-if="dataView =='table'">Mariana Guerra</label>
+<span v-if="dataView == 'food'" class="new badge">{{item.price}}</span>
 <span class="badge">
-<i v-if="!item.state" class="material-icons add"><router-link to="/admin">add</router-link></i>
+<i v-if="dataView =='table'" class="material-icons add"><router-link to="/order">add</router-link></i>
 <i @click="completeHmw(item.uid)" class="material-icons done">done</i>
-<i @click="deleteTable(item.uid)" class="material-icons delete">delete</i>
+<i @click="deleteTable(item.uid, dataView?dataView:'table')" class="material-icons delete">delete</i>
 </span>
 </div>
 </li>
@@ -20,30 +20,33 @@
 import firebase from 'firebase'
 export default {
 	name:'client',
-	props: ['dataList'],
+	props: ['dataView'],
 	data(){
       return {
 				items: [],
         color: '',
-        edit: false
+				edit: false,
+				stateView: 'food'				
       }
 	},
 	created(){
-		this.connection();
+		this.connection(this.dataView);
 	},
 	watch: {
-
+		dataView: function (newVal, oldValue) {
+			this.stateView = newVal
+		}
 	},
 	computed:{},
 	methods:{
-		connection () {
-			let tablesData = firebase.database().ref().child('table')			
+		connection (db) {
+			let tablesData = firebase.database().ref().child(db?db:'table')			
 			tablesData.on('value', data => {
 				this.items = data.val()
 			})
 		},
-		deleteTable(uid){
-			let refDelete = firebase.database().ref('table/' + uid)
+		deleteTable(uid, db){
+			let refDelete = firebase.database().ref(db+'/' + uid)
   		refDelete.remove()
 		}
 	},

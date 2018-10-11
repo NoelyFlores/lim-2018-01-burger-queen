@@ -14,7 +14,7 @@
     <footer>
       <div class="footer-copyright">
         <div class="container">
-          © 2014 Copyrigh Noely FC
+          © 2018 Copyrigh Noely FC
           <a class="grey-text text-lighten-4 right" href="#!">Agamoslo!!</a>
         </div>
       </div>

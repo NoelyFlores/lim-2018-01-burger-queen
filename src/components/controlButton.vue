@@ -1,6 +1,8 @@
 <template>
-<div>
-<input type="button" value="">
+<div class="row">
+<a class="waves-effect waves-light btn-large" @click="viewBreak()">Breakfast</a>
+<a class="waves-effect waves-light btn-large" @click="viewLunch()">Lunch</a>
+<a class="waves-effect waves-light btn-large" @click="viewDinner()">Dinner</a>
 </div>
 </template>
 <script>

@@ -19,7 +19,7 @@
 </div>
 </form>
 <div class="box-list">
-<list-mesa></list-mesa>
+<list-mesa :dataView="food"></list-mesa>
 </div>
 </div>
 </template>
@@ -36,6 +36,7 @@ export default {
 			txtfood: '',
 			message: '',
 			price: '',
+			food:'food'
 		}
 	},
 	created(){
@@ -54,7 +55,7 @@ export default {
 				let newKey = firebase.database().ref().child('food').push().key;
 				const type = (parseInt(this.price) + 1)
 				if(type >= 1){
-					firebase.database().ref('food/' + newKey).set({food:this.txtfood, price: num, uid:newKey})
+					firebase.database().ref('food/' + newKey).set({value:this.txtfood, price: num, uid:newKey})
 					this.message = ''
 					this.txtfood = ''
 					this.price = ''

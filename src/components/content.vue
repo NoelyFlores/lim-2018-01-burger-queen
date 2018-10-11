@@ -1,7 +1,7 @@
 <template>
 <div>
 <button-control></button-control>
-<product-food></product-food>
+<product-food :dataView="food"></product-food>
 <request-list></request-list>
 <input type="button" value="">
 </div>
@@ -9,13 +9,15 @@
 <script>
 /* eslint-disable */
 import button from '@/components/controlButton'
-import product from '@/components/product'
+import product from '@/components/listTable'
 import request from '@/components/request'
 export default {
 	name:'order',
 	props: [],
 	data(){
-
+		return {
+			food:'food'
+		}
 	},
 	created(){
 

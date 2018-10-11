@@ -14,7 +14,7 @@
 </div>
 </form>
 <div class="box-list">
-<list-mesa></list-mesa>
+<list-mesa :dataView="table"></list-mesa>
 </div>
 </div>
 </template>
@@ -28,7 +28,8 @@ export default {
 	data(){
 		return {
 			txtNumber: '',
-			message: '',
+            message: '',
+            table: 'table'
 		}
 	},
 	created(){
@@ -50,7 +51,7 @@ export default {
 				console.log(typeof type);	
 				if(type >= 1){
 					console.log('si')
-					firebase.database().ref('table/' + newKey).set({number:num, state: false, uid:newKey})
+					firebase.database().ref('table/' + newKey).set({value:num, state: false, uid:newKey})
 					this.message = ''
 					this.txtNumber = ''
 			}else{				
