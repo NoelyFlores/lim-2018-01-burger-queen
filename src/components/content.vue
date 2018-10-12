@@ -1,7 +1,7 @@
 <template>
 <div>
 <button-control></button-control>
-<product-food :dataView="food"></product-food>
+<product-food :dataView="type"></product-food>
 <request-list></request-list>
 <input type="button" value="">
 </div>
@@ -9,18 +9,21 @@
 <script>
 /* eslint-disable */
 import button from '@/components/controlButton'
-import product from '@/components/listTable'
+import product from '@/components/product'
 import request from '@/components/request'
 export default {
 	name:'order',
-	props: [],
+	props: ['typeView'],
 	data(){
 		return {
-			food:'food'
+			food:'food',
+			type:'break'
 		}
 	},
 	created(){
-
+		this.$root.$on("select-type", val => {
+      this.type = val;
+    });
 	},
 	watch: {
 

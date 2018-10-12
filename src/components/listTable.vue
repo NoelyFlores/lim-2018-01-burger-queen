@@ -2,11 +2,12 @@
 <ul class="collapsible">
 <label>holaa client</label>
 <li  v-for ='item in items' :key ='item.uid' class="collection-item">
-<div class="collapsible-header" v-bind:class="{ 'color': item.state, 'c-white': !item.state}">
+<div class="collapsible-header">
+<label v-if="dataView =='food'">{{item.category}}</label>
+<label v-if="dataView == 'food'" >{{item.type}}</label>
 <label>{{item.value}}</label>
-<label v-if="dataView =='table'">Mariana Guerra</label>
-<span v-if="dataView == 'food'" class="new badge">{{item.price}}</span>
 <span class="badge">
+<span v-if="dataView == 'food'" class="badge">S/. {{item.price}}</span>
 <i v-if="dataView =='table'" class="material-icons add"><router-link to="/order">add</router-link></i>
 <i @click="completeHmw(item.uid)" class="material-icons done">done</i>
 <i @click="deleteTable(item.uid, dataView?dataView:'table')" class="material-icons delete">delete</i>

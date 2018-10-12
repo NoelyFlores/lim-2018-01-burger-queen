@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style>
+nav {
+  background-color: #9E9E9E !important;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

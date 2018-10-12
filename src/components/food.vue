@@ -3,15 +3,35 @@
 <form class="col s12">
 <h3>Insert food</h3>
 <div class="box-insert">
+<select class="browser-default" v-model="category">
+<option value="" disabled selected>Category</option>
+<option value="break">Breakfast</option>
+<option value="lunch">Lunch</option>
+<option value="dinner">Dinner</option>
+</select>
+<select class="browser-default" v-model="type">
+<option value="" disabled selected>Type</option>
+<option value="Bebida">Bebida</option>
+<option value="Café">Café</option>
+<option value="Hamburguesa">Hamburguesa</option>
+<option value="Sandwich">Sandwich</option>
+<option value="Jugo">Jugo</option>
+<option value="Menu">Menu</option>
+<option value="Agregado">Agregado</option>
+</select>
 <div class="input-field col s6">
 <input id="first_name2" type="text" class="validate"  v-model="txtfood">
 <label class="active" for="first_name2">Name Food</label>
 </div>
 <div class="input-field col s6">
+<input id="first_name2" type="text" class="validate"  v-model="queantity">
+<label class="active" for="first_name2">Quantity</label>
+</div>
+<div class="input-field col s6">
 <input id="first_name2" type="text" class="validate" v-model="price">
 <label class="active" for="first_name2">Price</label>
 </div>
-
+<p>{{message}}</p>
 <div class="box-container-button">
 <span @click="insert()" ><i class="material-icons add">add</i></span>
 <span @click="clean()"><i class="material-icons clean">replay</i></span>
@@ -36,35 +56,39 @@ export default {
 			txtfood: '',
 			message: '',
 			price: '',
-			food:'food'
+			food:'food',
+			category: '',
+			type: '',
+			queantity:''
 		}
 	},
 	created(){
-
+	
 	},
 	watch: {
-
+		
 	},
 	computed:{
 
 	},
 	methods:{
 		insert(){
-			if(this.txtfood !== '' && this.price !== ''){
+			if(this.txtfood !== '' && this.price !== ''&& this.category !== ''){
 				const num = parseInt(this.price)
 				let newKey = firebase.database().ref().child('food').push().key;
-				const type = (parseInt(this.price) + 1)
-				if(type >= 1){
-					firebase.database().ref('food/' + newKey).set({value:this.txtfood, price: num, uid:newKey})
+				const number = (parseInt(this.price) + 1)
+				if(number >= 1){
+					firebase.database().ref('food/' + newKey).set({value:this.txtfood, type: this.type, category: this.category,queantity:this.queantity,price: num, uid:newKey})
 					this.message = ''
 					this.txtfood = ''
 					this.price = ''
+					this.category= ''
 			}else{				
 				
 					this.message='Not number'
 			}
 			}else{
-					this.message='Insert food or price'
+					this.message='Insert all description'
 			}
 		}
 	},
@@ -105,6 +129,8 @@ export default {
     margin: 0% 30%;
 }
 .col.s6 {
+	width: 100% !important;
+	display: inline-flex;
     outline: none !important;
     margin-top: 30px;
 }
@@ -114,6 +140,15 @@ input {
     width: 100% !important;
     margin: 0% !important;
     padding: 0em .5em !important;
+}
+.col{
+	flex:none !important
+}
+select {
+	float: left;
+    margin: 0em .2em;
+	border-color: #26a69a;
+	width: 48%;
 }
 @media(max-width: 600px){
 	.box-list {
