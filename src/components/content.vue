@@ -1,9 +1,8 @@
 <template>
 <div>
 <button-control></button-control>
-<product-food :dataView="type"></product-food>
+<product-food :dataView="{type:type, userId:uidTable}"></product-food>
 <request-list></request-list>
-<input type="button" value="">
 </div>
 </template>
 <script>
@@ -11,20 +10,25 @@
 import button from '@/components/controlButton'
 import product from '@/components/product'
 import request from '@/components/request'
+import {EventBus} from "@/plugin/bus.js"
 export default {
 	name:'order',
 	props: ['typeView'],
 	data(){
 		return {
 			food:'food',
-			type:'break'
+			type:'break',
+			uidTable: this.$route.params.userId	
 		}
 	},
 	created(){
-		this.$root.$on("select-type", val => {
+	EventBus.$on("select-type", val => {
       this.type = val;
     });
 	},
+  	beforeDestroy(){
+     EventBus.$off()
+  	},
 	watch: {
 
 	},

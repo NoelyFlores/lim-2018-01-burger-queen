@@ -7,11 +7,12 @@
 </template>
 <script>
 /* eslint-disable */
+import {EventBus} from "@/plugin/bus.js"
 export default {
 	name:'button',
 	props: [],
 	data(){
-
+		return {}
 	},
 	created(){
 
@@ -24,7 +25,7 @@ export default {
 	},
 	methods:{
 		viewType(value) {
-		this.$root.$emit('select-type', value)
+		EventBus.$emit('select-type', value)
 		}
 
 	},

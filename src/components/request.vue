@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in items" :key="item.uid">
+      <tr v-for="(item, index) in items" :key="index">
         <td><th>{{item.type}}</th><th>{{item.value}}</th></td>
         <td>S/. {{item.price}}</td>
         <td><i @click="deleteAsk(item.uid)" class="material-icons delete">delete</i></td>
@@ -18,11 +18,13 @@
         <td>S/. {{total}}</td>
       </tr>
     </tbody>
+    <input @click="send(items)" v-if="items.length >= 1" type="button" value="SEND KITCHEN" class="send">
   </table>
 </template>
 <script>
 /* eslint-disable */
 import firebase from 'firebase'
+import {EventBus} from "@/plugin/bus.js";
 export default {
 	name:'request',
 	props: [],
@@ -31,16 +33,18 @@ export default {
       items: [],
       idTable: '',
       total: 0.00
-
     }
 	},
 	created(){
-    this.$root.$on('ask-food', value => {
-      this.idTable = value
-      this.connection(value)
+  EventBus.$on('ask-food', value => {
+    this.idTable = value.uid    
+    console.log(value.uid)
+      this.connection(value.uid, value.index)
     })
-    
-	},
+  },
+  beforeDestroy(){
+     EventBus.$off()
+  },
 	watch: {
    items: function () {    
      this.total = 0      
@@ -53,38 +57,44 @@ export default {
  
   },
 	methods:{
-    connection(uid){
+    connection(uid, index){
+      console.log(uid, 'connection');
+      
       let tablesData = firebase.database().ref().child('table/'+uid+'/person')			
 			tablesData.on('value', data => {
         const arr = data.val();
+        if(arr !== null ){
         const temp = []
           Promise.all([arr])
         .then(response => {
-          response.map(element => {       
+          response.map(element => {                   
             Object.keys(element).map(data => {
             firebase.database().ref().child('food/'+ element[data].food)
             .on('value', food => {
               temp.push(food.val())
-              this.items = temp 
+              Object.defineProperty(temp[0], 'index',{value:index, writable:true, configurable:true, enumerable:true} )
+              this.items = temp
               })
             })            
           });
         })
         .catch()
+        }else{
+          this.items = []
+        }
 			})
     },
     deleteAsk(uid){
       let refDelete = firebase.database().ref('table/'+this.idTable+'/person')
-      refDelete.on('value', data =>{        
+      refDelete.once('value', data =>{        
           const search = data.val()
         if (search !== null) {
           Object.keys(data.val()).map(data => {
-          if(search[data].food === uid){
+          if(search[data].food === uid){       
             firebase.database().ref('table/'+ this.idTable+'/person/'+ data).remove()  
           }
         })
         }else{
-
         }
       })
     }
@@ -93,6 +103,12 @@ export default {
 }
 </script>
 <style>
+.send{
+  background:#FFEB3B;
+  border:1px solid #26a69a;
+  color: #26a69a;
+  padding: 1em;
+}
 .total {
   background: #26a69a;
   color: #fff;

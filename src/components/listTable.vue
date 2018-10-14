@@ -3,14 +3,14 @@
 <label>holaa client</label>
 <li  v-for ='item in items' :key ='item.uid' class="collection-item">
 <div class="collapsible-header">
-<label v-if="dataView =='food'">{{item.category}}</label>
-<label v-if="dataView == 'food'" >{{item.type}}</label>
+<label v-if="dataOption =='food'">{{item.category}}</label>
+<label v-if="dataOption == 'food'" >{{item.type}}</label>
 <label>{{item.value}}</label>
 <span class="badge">
-<span v-if="dataView == 'food'" class="badge">S/. {{item.price}}</span>
-<i v-if="dataView =='table'" class="material-icons add"><router-link to="/order">add</router-link></i>
+<span v-if="dataOption == 'food'" class="badge">S/. {{item.price}}</span>
+<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid }}">add</router-link></i>
 <i @click="completeHmw(item.uid)" class="material-icons done">done</i>
-<i @click="deleteTable(item.uid, dataView?dataView:'table')" class="material-icons delete">delete</i>
+<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
 </span>
 </div>
 </li>
@@ -21,34 +21,49 @@
 import firebase from 'firebase'
 export default {
 	name:'client',
-	props: ['dataView'],
+	props: ['dataOption'],
 	data(){
       return {
 				items: [],
         color: '',
-				edit: false,
-				stateView: 'food'				
+				state: false,
+				stateView: 'food',
+				alternative: this.dataOption?this.dataOption:'table'
       }
 	},
 	created(){
-		this.connection(this.dataView);
+		this.connection(this.dataOption);
 	},
 	watch: {
-		dataView: function (newVal, oldValue) {
+		dataOption: function (newVal, oldValue) {
 			this.stateView = newVal
 		}
 	},
 	computed:{},
 	methods:{
 		connection (db) {
-			let tablesData = firebase.database().ref().child(db?db:'table')			
+			// muestra la informacion de las mesas de forma automatica 
+			let tablesData = firebase.database().ref().child(db?db:'table')		
 			tablesData.on('value', data => {
 				this.items = data.val()
+				const color = data.val()
+				for (const key in color) {
+					if (color.hasOwnProperty('person')) {
+						this.state = true						
+					}
+				}
 			})
 		},
 		deleteTable(uid, db){
 			let refDelete = firebase.database().ref(db+'/' + uid)
   		refDelete.remove()
+		},
+		routeContent(uid){
+			console.log(this)
+			this.$router.push('order/', onComplete )
+		},
+		haber(uid){
+			return uid
 		}
 	},
 	components:{}
@@ -71,10 +86,9 @@ export default {
 	}
 	.material-icons input{
 		width: 70% !important;
-		background: red !important;
 	}
-	#edit{
-		background: blue;
-	}
+	.router-link-active {
+  color: #f66;
+}
 </style>
 

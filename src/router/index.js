@@ -11,7 +11,8 @@ export default new Router({
     {
       path: '/',
       name: 'client',
-      component: listTable
+      component: listTable,
+      meta: {list: 'tables'}
     },
     {
       path: '/admin',
@@ -19,9 +20,16 @@ export default new Router({
       component: admin
     },
     {
-      path: '/order',
+      path: '/order/',
       name: 'order',
       component: order
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

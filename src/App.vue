@@ -4,7 +4,10 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Logo</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><router-link to="/">Attention</router-link></li>
+            <li><router-link tag="li" to="/">
+              <a>Attention</a>
+              </router-link>
+            </li>
             <li><router-link to="/admin">Admin</router-link></li>
             <li><a href="collapsible.html">Logout</a></li>
           </ul>

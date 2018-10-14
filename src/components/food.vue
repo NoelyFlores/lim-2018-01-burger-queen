@@ -39,7 +39,7 @@
 </div>
 </form>
 <div class="box-list">
-<list-mesa :dataView="food"></list-mesa>
+<list-mesa :dataOption="food"></list-mesa>
 </div>
 </div>
 </template>
