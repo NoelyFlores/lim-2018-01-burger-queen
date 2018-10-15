@@ -11,20 +11,20 @@
       <tr v-for="(item, index) in items" :key="index">
         <td><th>{{item.type}}</th><th>{{item.value}}</th></td>
         <td>S/. {{item.price}}</td>
-        <td><i @click="deleteAsk(item.uid)" class="material-icons delete">delete</i></td>
+        <td><i @click="remove(item.index)" class="material-icons delete">delete</i></td>
       </tr>
       <tr class="total">
         <td>TOTAL</td>
         <td>S/. {{total}}</td>
       </tr>
     </tbody>
-    <input @click="send(items)" v-if="items.length >= 1" type="button" value="SEND KITCHEN" class="send">
+    <input @click="send(items,total)" v-if="items.length >= 1" type="button" value="SEND KITCHEN" class="send">
   </table>
 </template>
 <script>
 /* eslint-disable */
 import firebase from 'firebase'
-import {EventBus} from "@/plugin/bus.js";
+import {EventBus} from "@/plugin/bus.js"
 export default {
 	name:'request',
 	props: [],
@@ -36,10 +36,9 @@ export default {
     }
 	},
 	created(){
-  EventBus.$on('ask-food', value => {
-    this.idTable = value.uid    
-    console.log(value.uid)
-      this.connection(value.uid, value.index)
+    EventBus.$on('ask-food', value => {
+      this.idTable = value.uid
+      this.connection(value.uid)
     })
   },
   beforeDestroy(){
@@ -53,16 +52,13 @@ export default {
       })
     }
   },
-	computed:{
- 
+	computed:{ 
   },
 	methods:{
-    connection(uid, index){
-      console.log(uid, 'connection');
-      
+    connection(uid){      
       let tablesData = firebase.database().ref().child('table/'+uid+'/person')			
 			tablesData.on('value', data => {
-        const arr = data.val();
+        const arr = data.val()
         if(arr !== null ){
         const temp = []
           Promise.all([arr])
@@ -71,12 +67,12 @@ export default {
             Object.keys(element).map(data => {
             firebase.database().ref().child('food/'+ element[data].food)
             .on('value', food => {
-              temp.push(food.val())
-              Object.defineProperty(temp[0], 'index',{value:index, writable:true, configurable:true, enumerable:true} )
+              temp.push(food.val())  
+              Object.defineProperty(temp[temp.length-1], 'index',{value:temp.length, writable:true, configurable:true, enumerable:true} )
               this.items = temp
               })
             })            
-          });
+          })
         })
         .catch()
         }else{
@@ -84,19 +80,26 @@ export default {
         }
 			})
     },
-    deleteAsk(uid){
-      let refDelete = firebase.database().ref('table/'+this.idTable+'/person')
-      refDelete.once('value', data =>{        
-          const search = data.val()
-        if (search !== null) {
-          Object.keys(data.val()).map(data => {
-          if(search[data].food === uid){       
-            firebase.database().ref('table/'+ this.idTable+'/person/'+ data).remove()  
-          }
-        })
-        }else{
-        }
+    remove(index){
+      const arrayItems = this.items
+      const data = arrayItems.filter(data => data.index === index)
+      firebase.database().ref('table/'+this.idTable+'/person')
+      .once('value', data=> {       
+       firebase
+       .database()
+       .ref('table/'+ this.idTable+'/person/'+ Object.keys(data.val())[index-1])
+       .remove()  
       })
+    },
+    send(items, total) {
+      const dt = new Date()
+      const date = dt.getDate() + '-' + (dt.getMonth()+1) + '-' + dt.getFullYear()
+      const key = firebase.database().ref().child('kitchen/' + date + '/' + this.idTable).push().key
+      const array = items.map(data => data.uid)
+      firebase.database()
+      .ref('kitchen/' + date + '/' + this.idTable+'/'+ key)
+      .set({total: total, platos: array})
+      .then()
     }
 	},
 	components:{}
@@ -120,7 +123,7 @@ table {
   box-shadow: 0 0 4px 0px #c5c5bd;
   color: #b1a9aa;
 }
-tr{
+tr {
   border-bottom: 1px solid #80808030;
 }
 </style>

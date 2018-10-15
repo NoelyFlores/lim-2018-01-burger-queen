@@ -44,19 +44,16 @@ export default {
       })
     },
     pedir (uid) {
-      
       const newKey = firebase.database().ref().child('table/'+this.dataView.userId+'/person').push().key
-      let ID = firebase.database().ref().child('table/'+this.dataView.userId+'/person')			
-      let index
-			ID.on('value', data => {     
-        if(data.val() !== null){
-          const arr = data.val()
-          index = Object.keys(arr)
-        }        
+      firebase.database()
+      .ref('table/'+this.dataView.userId+'/person/' + newKey)
+      .set({food: uid})
+      .then(data => {
+        EventBus.$emit('ask-food', { uid:this.dataView.userId })         
       })
-      const i = index?index.length:0
-      firebase.database().ref('table/'+this.dataView.userId+'/person/' + newKey).set({food: uid})
-      EventBus.$emit('ask-food', {uid:this.dataView.userId, index: i+1}) 
+    },
+    calcularCantidad () {
+      
     },
     comprovar () {
       firebase
