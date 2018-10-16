@@ -1,15 +1,19 @@
 <template>
 <ul class="collapsible">
-<label>holaa client</label>
+<span v-if="alternative == 'table'" class= "badge">
+	<label class="active">ocupado</label>
+	<label class="process">Proceso</label>
+	<label class="libre">Desocupado</label>
+</span>
 <li  v-for ='item in items' :key ='item.uid' class="collection-item">
-<div class="collapsible-header">
+<div class="collapsible-header" v-bind:class="[item.state]">
 <label v-if="dataOption =='food'">{{item.category}}</label>
 <label v-if="dataOption == 'food'" >{{item.type}}</label>
+<label v-if="alternative == 'table'">Mesa</label>
 <label>{{item.value}}</label>
 <span class="badge">
 <span v-if="dataOption == 'food'" class="badge">S/. {{item.price}}</span>
-<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid }}">add</router-link></i>
-<i class="material-icons done">done</i>
+<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
 <i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
 </span>
 </div>
@@ -23,13 +27,13 @@ export default {
 	name:'client',
 	props: ['dataOption'],
 	data(){
-      return {
-				items: [],
-        color: '',
-				state: false,
-				stateView: 'food',
-				alternative: this.dataOption?this.dataOption:'table'
-      }
+    return {
+			items: [],
+      color: '',
+			state: false,
+			stateView: 'food',
+			alternative: this.dataOption?this.dataOption:'table'
+    }
 	},
 	created(){
 		this.connection(this.dataOption);
@@ -45,30 +49,26 @@ export default {
 			// muestra la informacion de las mesas de forma automatica 
 			let tablesData = firebase.database().ref().child(db?db:'table')		
 			tablesData.on('value', data => {
-				this.items = data.val()
-				const color = data.val()
-				for (const key in color) {
-					if (color.hasOwnProperty('person')) {
-						this.state = true						
-					}
-				}
+				this.items = data.val()				
 			})
-		},
-		deleteTable(uid, db){
-			firebase.database().ref(db+'/' + uid).remove()
-		},
-		routeContent(uid){
-			console.log(this)
-			this.$router.push('order/', onComplete )
-		},
-		haber(uid){
-			return uid
 		}
 	},
 	components:{}
 }
 </script>
 <style>
+span.badge {
+	float: none;
+}
+	.active{
+		color: #4CAF50;
+	}
+	.process{
+		color: #FFEB3B
+	}
+	.libre{
+		color: #6a6c6d
+	}
 	.color {
 		background-color: #babebe75;;
 	}
@@ -88,6 +88,18 @@ export default {
 	}
 	.router-link-active {
   color: #f66;
-}
+	}
+	.pendiente{
+    background: #FFEB3B;
+    color:#8c8787 !important
+	}
+	.ocupado{
+    background: #4CAF50;
+    color: #fff !important;
+	}
+	.desocupado{
+		background: #fff;
+		color: #8c8787 !important
+	}
 </style>
 

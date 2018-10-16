@@ -1,9 +1,10 @@
 <template>
-  <ul class="collection">						
-		<li v-for="(item, index) in items" :key="index" class="collection-item"> {{item.type}} {{item.value}}</li>		
-	</ul>
+<ul class="collection">
+<li v-for="(item, index) in items" :key="index" class="collection-item"> {{item.type}} {{item.value}}</li>
+</ul>
 </template>
 <script>
+/* eslint-disable */
 import firebase from 'firebase'
 export default {
 	name: 'waitList',
@@ -28,13 +29,13 @@ export default {
             .on('value', food => {
               temp.push(food.val())  
               this.items = temp
-              })
+            })
 					})
-				}else{
-					this.items = []
-				}
-			})
-		},
-	}
+				}else {
+            this.items = []
+	   			}
+        })
+    }
+  }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 <div>
-<button-control></button-control>
+<button-control :numTable="numTable"></button-control>
 <product-food :dataView="{type:type, userId:uidTable}"></product-food>
 <request-list :uidTable="uidTable"></request-list>
 </div>
@@ -18,7 +18,8 @@ export default {
 		return {
 			food:'food',
 			type:'break',
-			uidTable: this.$route.params.userId	
+			uidTable: this.$route.params.userId,
+			numTable: this.$route.params.num
 		}
 	},
 	created(){

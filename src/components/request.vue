@@ -2,9 +2,9 @@
   <table>
     <thead>
       <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Option</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Opción</th>
       </tr>
     </thead>
     <tbody>
@@ -98,10 +98,10 @@ export default {
       const data = arrayItems.filter(data => data.index === index)
       firebase.database().ref('table/'+this.idTable+'/person')
       .once('value', data=> {       
-       firebase
-       .database()
-       .ref('table/'+ this.idTable+'/person/'+ Object.keys(data.val())[index-1])
-       .remove()  
+        firebase
+        .database()
+        .ref('table/'+ this.idTable+'/person/'+ Object.keys(data.val())[index-1])
+        .remove()  
       })
     },
     send(items, total) {  
