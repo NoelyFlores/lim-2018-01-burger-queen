@@ -9,7 +9,7 @@
 <span class="badge">
 <span v-if="dataOption == 'food'" class="badge">S/. {{item.price}}</span>
 <i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid }}">add</router-link></i>
-<i @click="completeHmw(item.uid)" class="material-icons done">done</i>
+<i class="material-icons done">done</i>
 <i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
 </span>
 </div>

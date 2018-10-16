@@ -2,9 +2,9 @@
   <table>
     <thead>
       <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Option</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Opcion</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,8 @@
         <td>S/. {{total}}</td>
       </tr>
     </tbody>
-    <input @click="send(items,total)" v-if="items.length >= 1" type="button" value="SEND KITCHEN" class="send">
+    <input @click="send(items,total)" v-if="items.length >= 1" type="button" value="ENVIAR A COCINA" class="send">
+    <input @click="pay(items,total)" v-if="items.length >= 1" type="button" value="FINALIZADO" class="send">
   </table>
 </template>
 <script>
@@ -58,23 +59,17 @@ export default {
     connection(uid){      
       let tablesData = firebase.database().ref().child('table/'+uid+'/person')			
 			tablesData.on('value', data => {
-        const arr = data.val()
-        if(arr !== null ){
+        const element = data.val()
+        if(element !== null ){
         const temp = []
-          Promise.all([arr])
-        .then(response => {
-          response.map(element => {                   
-            Object.keys(element).map(data => {
-            firebase.database().ref().child('food/'+ element[data].food)
-            .on('value', food => {
-              temp.push(food.val())  
-              Object.defineProperty(temp[temp.length-1], 'index',{value:temp.length, writable:true, configurable:true, enumerable:true} )
-              this.items = temp
-              })
-            })            
+        Object.keys(element).map(data => {
+          firebase.database().ref().child('food/'+ element[data].food)
+          .on('value', food => {
+            temp.push(food.val())  
+            Object.defineProperty(temp[temp.length-1], 'index',{value:temp.length, writable:true, configurable:true, enumerable:true} )
+            this.items = temp
+            })
           })
-        })
-        .catch()
         }else{
           this.items = []
         }

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import admin from '@/components/admin'
 import listTable from '@/components/listTable'
 import order from '@/components/content'
+import kitchen from '@/components/kitchen'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/order/',
       name: 'order',
       component: order
+    },
+    {
+      path: '/kitchen',
+      name: 'kitchen',
+      component: kitchen
     }
   ],
   scrollBehavior (to, from, savedPosition) {
