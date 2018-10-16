@@ -2,7 +2,7 @@
 <div>
 <button-control></button-control>
 <product-food :dataView="{type:type, userId:uidTable}"></product-food>
-<request-list></request-list>
+<request-list :uidTable="uidTable"></request-list>
 </div>
 </template>
 <script>

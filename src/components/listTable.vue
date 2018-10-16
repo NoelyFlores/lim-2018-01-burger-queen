@@ -55,8 +55,7 @@ export default {
 			})
 		},
 		deleteTable(uid, db){
-			let refDelete = firebase.database().ref(db+'/' + uid)
-  		refDelete.remove()
+			firebase.database().ref(db+'/' + uid).remove()
 		},
 		routeContent(uid){
 			console.log(this)

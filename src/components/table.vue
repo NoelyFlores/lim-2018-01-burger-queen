@@ -51,7 +51,7 @@ export default {
 				console.log(typeof type);	
 				if(type >= 1){
 					console.log('si')
-					firebase.database().ref('table/' + newKey).set({value:num, state: false, uid:newKey})
+					firebase.database().ref('table/' + newKey).set({value:num, state: 'desocupado', uid:newKey})
 					this.message = ''
 					this.txtNumber = ''
 			}else{				

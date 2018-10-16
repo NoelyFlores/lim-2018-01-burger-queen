@@ -49,11 +49,9 @@ export default {
       .ref('table/'+this.dataView.userId+'/person/' + newKey)
       .set({food: uid})
       .then(data => {
-        EventBus.$emit('ask-food', { uid:this.dataView.userId })         
+        firebase.database().ref('table/'+this.dataView.userId).update({state:'pendiente'})
+        EventBus.$emit('ask-food', { uid:this.dataView.userId })
       })
-    },
-    calcularCantidad () {
-      
     },
     comprovar () {
       firebase

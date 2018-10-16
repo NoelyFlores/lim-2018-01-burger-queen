@@ -8,7 +8,7 @@
         </div>
         <div class="card-action">
           <a @click="cancel()">CANCELAR</a>
-          <a @listo="served()">LISTO!</a>
+          <a @click="changeState(item.uid)">LISTO!</a>
         </div>
       </div>
     </div>
@@ -36,6 +36,10 @@ export default {
 			.on('value', data => {
 				this.items = data.val()
 			})
+		},
+		changeState(uidTable) {
+		// cambiar el estado de la mesa a servido u ocupado!!!
+		firebase.database().ref('table/'+uidTable).update({state:'ocupado'})
 		}
 	},
 	components:{'wait-list': waitList}
