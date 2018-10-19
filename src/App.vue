@@ -90,9 +90,10 @@ nav ul a {
     color: #1C77C3 !important;
     border: 1px solid #1C77C3 !important;
     background: #fff !important;    
-    width: 45% !important;
+    width: 30% !important;
     height: 35px !important;
     line-height: 35px !important;
+    margin: 0% 3px;
   }
   .btn, .btn-large:hover{
     border: 1px solid #FFC200 !important;

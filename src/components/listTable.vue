@@ -1,29 +1,30 @@
 <template>
-<ul class="collapsible">
-<li  v-for ='item in items' :key ='item.uid' class="collection-item">
-<div class="collapsible-header" v-bind:class="[item.state]">
-<div  v-if="dataOption =='food'">
-<label>{{item.category}}</label>
-<label>{{item.type}}</label>
-</div>
-<label v-if="alternative == 'table'">Mesa</label>
-<label>{{item.value}}</label>
-<span class="badge">
-<div v-if="dataOption == 'food'" class="optionFood">
-<span class="badge">S/. {{item.price}}.00</span>
-<i @click="edit(item.uid)" class="material-icons add">edit</i>
-</div>
-<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
-<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
-</span>
-</div>
-</li>
-<span v-if="alternative == 'table'" class= "badge">
-<label class="active">ocupado</label>
-<label class="process">Proceso</label>
-<label class="libre">Desocupado</label>
-</span>
-</ul>
+	<ul class="collapsible">
+		<li v-for ='item in items' :key ='item.uid' class="collection-item">
+			<div class="collapsible-header" v-bind:class="[item.state]">
+				<div v-if="dataOption =='food'">
+				<label>{{item.category}}</label>
+				<label>{{item.type}}</label>
+				</div>
+				<label v-if="alternative == 'table'">Mesa</label>
+				<label>{{item.value}}</label>
+				<span class="badge">
+					<div v-if="dataOption == 'food'" class="optionFood">
+						<span class="badge">S/. {{item.price}}.00</span>
+						<i @click="edit(item.uid)" class="material-icons add">edit</i>
+					</div>
+					<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
+					<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
+				</span>
+			</div>
+		</li>
+		<span v-if="alternative == 'table'" class= "badge">
+			<label class="active">ocupado</label>
+			<label class="process">Proceso</label>
+			<label class="libre">Desocupado</label>
+		</span>
+		<router-view/>
+	</ul>
 </template>
 <script>
 /* eslint-disable */ 

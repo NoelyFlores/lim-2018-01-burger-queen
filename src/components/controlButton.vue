@@ -1,34 +1,36 @@
 <template>
   <div class="row">
-    <a class="waves-effect waves-light btn-large request" @click="viewType('break')">Desayuno</a>
-    <a class="waves-effect waves-light btn-large request" @click="viewType('lunch')">Almuerzo</a>
-    <a class="waves-effect waves-light btn-large request" @click="viewType('dinner')">Cena</a>
-<span class="badge"><h5>M{{numTable}}</h5></span>
+    <a v-for="(item, index) in items" :key="item" class="waves-effect waves-light btn-large request" @click="viewType(item)">{{index}}</a>
+   <span class="badge"><h5>M{{numTable}}</h5></span>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import {EventBus} from "@/plugin/bus.js"
+import titleButton from '@/plugin/titles.js'
 export default {
 	name:'button',
 	props: ['numTable'],
 	data(){
-		return {}
+		return {
+			items: []
+		}
 	},
 	created(){
-
+		Object.keys(titleButton).map(element => {
+			if(element === 'employed'){
+				this.items = titleButton[element]
+			}
+		});		
 	},
 	watch: {
-
 	},
 	computed:{
-
 	},
 	methods:{
 		viewType(value) {
 		EventBus.$emit('select-type', value)
 		}
-
 	},
 	components:{}
 }
@@ -52,5 +54,6 @@ h5 {
 }
 .request{
 	width: 30% !important;
+	margin: 0px 3px;
 }
 </style>

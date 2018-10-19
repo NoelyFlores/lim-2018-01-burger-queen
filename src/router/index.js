@@ -4,6 +4,7 @@ import admin from '@/components/admin'
 import listTable from '@/components/listTable'
 import order from '@/components/content'
 import kitchen from '@/components/kitchen'
+import edit from '@/components/edit'
 
 Vue.use(Router)
 
@@ -12,13 +13,23 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
-
     },
     {
       path: '/',
+      redirect: 'admin'
+    },
+    {
+      path: 'admin',
       name: 'client',
       component: listTable,
-      meta: {list: 'tables'}
+      meta: {list: 'tables'},
+      children: [
+        {
+          path: 'edit',
+          name: 'edit',
+          component: edit
+        }
+      ]
     },
     {
       path: 'order',

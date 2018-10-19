@@ -64,15 +64,10 @@ export default {
 			queantity:''
 		}
 	},
-	created(){
-	
+	created(){	
 	},
-	watch: {
-		
-	},
-	computed:{
-
-	},
+	watch: {},
+	computed:{},
 	methods:{
 		insert(){
 			if(this.txtfood !== '' && this.price !== ''&& this.category !== ''){

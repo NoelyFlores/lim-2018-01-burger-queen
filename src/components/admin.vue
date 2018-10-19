@@ -1,8 +1,9 @@
 <template>
 <div class="row">
-<a class="waves-effect waves-light btn-large" @click="insertFood()">Insert Food</a>
-<a class="waves-effect waves-light btn-large" @click="insertTable()">Insert Table</a>
-<div v-if="view ==false">
+<a v-for="(item, index) in items" :key="item" class="waves-effect waves-light btn-large request" @click="viewAdmin(item)">{{index}}</a>
+<!-- <a class="waves-effect waves-light btn-large" @click="insertFood()">Angregar Comida</a>
+<a class="waves-effect waves-light btn-large" @click="insertTable()">Agregar Mesa</a> -->
+<div v-if="view == false">
 <list-food></list-food>
 </div>
 <div v-else>
@@ -14,6 +15,7 @@
 /* eslint-disable */ 
 import listTable from '@/components/table'
 import listFood from '@/components/food'
+import titleButton from '@/plugin/titles.js'
 export default {
 	name:'admin',
 	props: [],
@@ -24,22 +26,23 @@ export default {
 		}
 	},
 	created(){
-
+		Object.keys(titleButton).map(element => {
+			if(element === 'admin'){
+				this.items = titleButton[element]
+			}
+		});	
 	},
-	watch: {
-
-	},
-	computed:{
-
-	},
+	watch: {},
+	computed:{},
 	methods:{
-		insertTable(){
-			this.view = true
-		},
-		insertFood(){
-			this.view = false
+		viewAdmin(state){
+			if(state === 'table'){
+				this.view = true
+			}
+			else if(state === 'food'){
+				this.view = false
+			}			
 		}
-
 	},
 	components: {
 	 'list-table': listTable,
