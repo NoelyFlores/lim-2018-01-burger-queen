@@ -1,23 +1,28 @@
 <template>
 <ul class="collapsible">
-<span v-if="alternative == 'table'" class= "badge">
-	<label class="active">ocupado</label>
-	<label class="process">Proceso</label>
-	<label class="libre">Desocupado</label>
-</span>
 <li  v-for ='item in items' :key ='item.uid' class="collection-item">
 <div class="collapsible-header" v-bind:class="[item.state]">
-<label v-if="dataOption =='food'">{{item.category}}</label>
-<label v-if="dataOption == 'food'" >{{item.type}}</label>
+<div  v-if="dataOption =='food'">
+<label>{{item.category}}</label>
+<label>{{item.type}}</label>
+</div>
 <label v-if="alternative == 'table'">Mesa</label>
 <label>{{item.value}}</label>
 <span class="badge">
-<span v-if="dataOption == 'food'" class="badge">S/. {{item.price}}</span>
+<div v-if="dataOption == 'food'" class="optionFood">
+<span class="badge">S/. {{item.price}}.00</span>
+<i @click="edit(item.uid)" class="material-icons add">edit</i>
+</div>
 <i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
 <i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
 </span>
 </div>
 </li>
+<span v-if="alternative == 'table'" class= "badge">
+<label class="active">ocupado</label>
+<label class="process">Proceso</label>
+<label class="libre">Desocupado</label>
+</span>
 </ul>
 </template>
 <script>
@@ -36,7 +41,7 @@ export default {
     }
 	},
 	created(){
-		this.connection(this.dataOption);
+		this.connection(this.dataOption)
 	},
 	watch: {
 		dataOption: function (newVal, oldValue) {
@@ -51,34 +56,30 @@ export default {
 			tablesData.on('value', data => {
 				this.items = data.val()				
 			})
+		},
+		deleteTable(uid, db){
+		  firebase.database().ref(db+'/' + uid).remove()
 		}
 	},
 	components:{}
 }
 </script>
 <style>
+.optionFood{
+	display: inline-block;
+}
 span.badge {
 	float: none;
+	color: #b1a9aa;
 }
 	.active{
-		color: #4CAF50;
+		color: #8bc34aa3;
 	}
 	.process{
 		color: #FFEB3B
 	}
 	.libre{
 		color: #6a6c6d
-	}
-	.color {
-		background-color: #babebe75;;
-	}
-	.color label{
-		text-decoration: line-through;
-		color: #6a6c6d;	
-	}
-	label {
-		font-size: 1rem !important;
-		margin: 0em .5em;
 	}
 	.c-white {
 		background-color: white
@@ -87,19 +88,19 @@ span.badge {
 		width: 70% !important;
 	}
 	.router-link-active {
-  color: #f66;
+    color: #FFC200;
 	}
 	.pendiente{
-    background: #FFEB3B;
-    color:#8c8787 !important
+	  background: #ffeb3b63;
+    color: #8c8787 !important;
 	}
 	.ocupado{
-    background: #4CAF50;
+    background: #8bc34aa3;
     color: #fff !important;
 	}
 	.desocupado{
-		background: #fff;
-		color: #8c8787 !important
+	  background: #fff;
+	  color: #8c8787 !important
 	}
 </style>
 

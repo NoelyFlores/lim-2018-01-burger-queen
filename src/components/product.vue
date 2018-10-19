@@ -1,13 +1,12 @@
 <template>
 <ul class="collapsible">
-<label>Menu para hoy</label>
 <li  v-for ='item in items' :key ='item.uid' v-if="item.category==dataView.type" class="collection-item">
 <div class="collapsible-header">
 <label>{{item.type}}</label>
 <label>{{item.value}}</label>
 <label>{{item.queantity?item.queantity:''}}</label>
 <span class="badge">
-<span class="badge">S/. {{item.price}}</span>
+<span class="badge">S/. {{item.price}}.00</span>
 <i @click="pedir(item.uid)" class="material-icons done">done</i>
 </span>
 </div>
@@ -78,10 +77,6 @@ export default {
   text-decoration: line-through;
   color: #6a6c6d;
 }
-label {
-  font-size: 1rem !important;
-  margin: 0em 0.5em;
-}
 .c-white {
   background-color: white;
 }
@@ -93,8 +88,8 @@ label {
   background: blue;
 }
 .collapsible {
-    margin: 0rem 1rem 1rem 1rem !important;
-    width: 48% !important;
+    margin: 0rem 1.5% 1rem 3.5% !important;
+    width: 45% !important;
     float: left;
 }
 </style>

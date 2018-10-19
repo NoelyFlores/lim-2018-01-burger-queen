@@ -10,10 +10,20 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '*',
+      redirect: '/'
+
+    },
+    {
       path: '/',
       name: 'client',
       component: listTable,
       meta: {list: 'tables'}
+    },
+    {
+      path: 'order',
+      name: 'order',
+      component: order
     },
     {
       path: '/admin',
@@ -21,21 +31,16 @@ export default new Router({
       component: admin
     },
     {
-      path: '/order/',
-      name: 'order',
-      component: order
-    },
-    {
       path: '/kitchen',
       name: 'kitchen',
       component: kitchen
     }
-  ],
-  scrollBehavior (to, from, savedPosition) {
+  ]
+/*   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {
       return { x: 0, y: 0 }
     }
-  }
+  } */
 })

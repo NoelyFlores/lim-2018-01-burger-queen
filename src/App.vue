@@ -2,12 +2,12 @@
   <div id="app">
       <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Logo</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><router-link tag="li" to="/">Cliente</router-link></li>
-            <li><router-link to="/kitchen">Cocina</router-link></li>
-            <li><router-link to="/admin">Admin</router-link></li>
-            <li><a href="collapsible.html">Cerrar Sesión</a></li>
+          <a href="#!" class="brand-logo"><i class="material-icons">local_dining</i>Burger Queen</a>
+          <ul class="right hide-on-med-and-down">
+            <li><router-link to="/home"><i class="material-icons">assignment_turned_in</i></router-link></li>
+            <li><router-link to="/kitchen"><i class="material-icons">restaurant</i></router-link></li>
+            <li><router-link to="/admin"><i class="material-icons">assignment_ind</i></router-link></li>
+            <li><a href="collapsible.html"><i class="material-icons">more_vert</i></a></li>
           </ul>
         </div>
       </nav>
@@ -16,7 +16,7 @@
       <div class="footer-copyright">
         <div class="container">
           © 2018 Copyrigh Noely FC
-          <a class="grey-text text-lighten-4 right" href="#!">Agamoslo!!</a>
+          <a class="grey-text text-lighten-4 right" href="#!">H♥</a>
         </div>
       </div>
     </footer>
@@ -30,8 +30,47 @@ export default {
 </script>
 
 <style>
+.add, .clean, .done {  
+  font-weight: bold;
+  font-size: 2.6em;
+}
+.add {
+  color: #CDDC39;
+}
+.clean {  
+  color: #ffc200
+}
+.delete{
+ color:#1C77C3;
+}
+.title{
+	width: 90% !important;
+	margin: 0% 5% 2.5%;
+	border-bottom: .5px solid #8BC34A;
+}
+.title h5, .titletwo h5{
+  	margin: 0rem 0 0rem -85% !important;
+    display: inline;
+    color: #fff;
+    font-size: 14.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+
+}
+.titletwo h5{
+  background:  #fec81d;  
+}
+.title h5{
+  background: #8BC34A;
+}
 nav {
-  background-color: #9E9E9E !important;
+  background-color: #1C77C3 !important;
+}
+nav i.material-icons {
+    margin-right: 10px;
+}
+nav ul a {
+  padding: 0 20px !important;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -39,5 +78,52 @@ nav {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+  nav .brand-logo {
+    font-size: 1.5rem !important;
+    left: 10%;
+    font-family: serif;
+    color: #fff !important;
+    text-shadow: 0 0 8px #03A9F4;
+  }
+  .btn, .btn-large {
+    color: #1C77C3 !important;
+    border: 1px solid #1C77C3 !important;
+    background: #fff !important;    
+    width: 45% !important;
+    height: 35px !important;
+    line-height: 35px !important;
+  }
+  .btn, .btn-large:hover{
+    border: 1px solid #FFC200 !important;
+    background: #FFC200 !important;
+  }
+  label {
+    font-size: 18px !important;
+    font-family: serif;
+    margin: 0em .2em;
+    color: #575757;
+}
+.done[data-v-4ce970e2] {
+    color: #1C77C3;
+}
+footer{
+  bottom: 0% !important;
+  position: fixed;
+  width: 100%;
+  background: #8080806e;
+}
+@media only screen and (max-width: 992px){
+  .hide-on-med-and-down {
+      display: block !important;
+  }
+  nav .brand-logo {
+    left: 20%;
+  }
+}
+@media (max-width: 750px) {
+  nav .brand-logo {
+    display: none
+  }
 }
 </style>

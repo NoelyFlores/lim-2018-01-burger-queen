@@ -1,7 +1,9 @@
 <template>
 <div class="row">
+<div class= "title">
+<h5>Insertar Mesas</h5>	
+</div>
 <form class="col s12">
-<h3>Insert Table</h3>
 <div class="box-insert">
 <div class="box-container-txt">
 <input  v-model="txtNumber" @keyup.enter="insert()" type="text" placeholder="Number table">
@@ -73,21 +75,22 @@ export default {
 form p{
 	text-align: center !important;
 }
-
-.box-container-txt{
-    float: left;
-    width: 80%;
+.box-container-txt {
+  float: left;
+  width: 100%;
+	height: 50px;
 }
-
 .collapsible {
   border-top: none !important;
 	border-right: none !important;
 	border-left: none !important;
 	box-shadow: none !important;
+	height: 500px;
+  overflow: scroll;
 	}
 @media (max-width: 480px){
-.box-container-txt {
-    width: 75%;
-}
+	.box-container-txt {
+			width: 75%;
+	}
 }
 </style>

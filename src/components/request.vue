@@ -1,7 +1,7 @@
 <template>
   <table>
     <thead>
-      <tr>
+      <tr class="title">
         <th>Producto</th>
         <th>Precio</th>
         <th>Opción</th>
@@ -9,17 +9,18 @@
     </thead>
     <tbody>
       <tr v-for="(item, index) in items" :key="index">
-        <td><th>{{item.type}}</th><th>{{item.value}}</th></td>
-        <td>S/. {{item.price}}</td>
+        <td><label>{{item.type}}</label><label>{{item.value}}</label></td>
+        <td>S/. {{item.price}}.00</td>
         <td><i @click="remove(item.index)" class="material-icons delete">delete</i></td>
       </tr>
       <tr class="total">
         <td>TOTAL</td>
-        <td>S/. {{total}}</td>
+        <td>S/. {{total}}.00</td>
       </tr>
     </tbody>
-    <input @click="send(items,total)" v-if="items.length >= 1" type="button" :disabled="stateButton" value="Finalizar Orden" class="send">
-    <i  v-if="message == true" class="material-icons done">done</i>
+    <input @click="send(items,total)" v-if="items.length >= 1" type="button" :disabled="stateButton" value="Finalizar" class="btn-large send">
+    <i v-if="message == true" class="material-icons donetwo">done</i>
+    <i v-if="cancelOrder == true" class="material-icons donetwo">close</i>
   </table>
 </template>
 <script>
@@ -35,12 +36,16 @@ export default {
       idTable: '',
       total: 0.00,
       stateButton:true,
-      message: false
+      message: false,
+      cancelOrder: false
     }
 	},
 	created(){
     EventBus.$on('ask-food', value => {
       this.idTable = value.uid      
+    })
+    EventBus.$on('cancel-order', cancel => {
+      this.cancelOrder = cancel
     })
     this.connection(this.uidTable)
         firebase.database().ref().child('table/'+this.uidTable + '/state/')
@@ -124,18 +129,16 @@ export default {
 }
 </script>
 <style>
-.send{
-  background:#FFEB3B;
-  border:1px solid #26a69a;
-  color: #26a69a;
-  padding: 1em;
+.send {
+    float: left !important;
+    margin: 15px 0px 15px 15px !important;
 }
 .total {
-  background: #26a69a;
-  color: #fff;
+  color: #181717;
+  font-weight: bold;
 }
 table {
-  width: 48% !important;
+  width: 45% !important;
   margin: .5rem 1rem 1rem 1rem !important;
   border: 1px solid #e1dbdb;
   box-shadow: 0 0 4px 0px #c5c5bd;
@@ -144,8 +147,16 @@ table {
 tr {
   border-bottom: 1px solid #80808030;
 }
-.done {
-  color:#26a69a;
-  margin-left: 10px;
+.delete {
+	color: #1c77c3;;
+}
+.title{
+  border-bottom: 1px solid #8BC34A;
+  color: #464444;
+}
+.donetwo{  
+  margin-top: 18px;
+  font-weight: bold;
+  color: #8bc34a;
 }
 </style>

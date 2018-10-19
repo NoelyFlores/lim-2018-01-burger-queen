@@ -39,3 +39,16 @@ export default {
   }
 }
 </script>
+<style scoped>
+	.collection {
+			height: 180px;
+			overflow: scroll;
+	}
+	.collection .collection-item {
+    line-height: 1rem;
+    font-size: 18px;
+    font-family: serif;
+	}
+
+</style>
+

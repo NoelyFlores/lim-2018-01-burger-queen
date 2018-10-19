@@ -1,16 +1,18 @@
 <template>
 <div class="row">
+<div class= "title">
+<h5>Insertar Comida</h5>	
+</div>	
 <form class="col s12">
-<h3>Insert food</h3>
 <div class="box-insert">
 <select class="browser-default" v-model="category">
-<option value="" disabled selected>Category</option>
+<option value="" disabled selected>Categoria</option>
 <option value="break">Breakfast</option>
 <option value="lunch">Lunch</option>
 <option value="dinner">Dinner</option>
 </select>
 <select class="browser-default" v-model="type">
-<option value="" disabled selected>Type</option>
+<option value="" disabled selected>Tipo</option>
 <option value="Bebida">Bebida</option>
 <option value="Café">Café</option>
 <option value="Hamburguesa">Hamburguesa</option>
@@ -21,19 +23,19 @@
 </select>
 <div class="input-field col s6">
 <input id="first_name2" type="text" class="validate"  v-model="txtfood">
-<label class="active" for="first_name2">Name Food</label>
+<label class="active" for="first_name2">Nombre</label>
 </div>
 <div class="input-field col s6">
 <input id="first_name2" type="text" class="validate"  v-model="queantity">
-<label class="active" for="first_name2">Quantity</label>
+<label class="active" for="first_name2">Cantidad</label>
 </div>
 <div class="input-field col s6">
 <input id="first_name2" type="text" class="validate" v-model="price">
-<label class="active" for="first_name2">Price</label>
+<label class="active" for="first_name2">Precios</label>
 </div>
 <p>{{message}}</p>
 <div class="box-container-button">
-<span @click="insert()" ><i class="material-icons add">add</i></span>
+<span @click="insert()" > <i class="material-icons add">add</i></span>
 <span @click="clean()"><i class="material-icons clean">replay</i></span>
 </div>
 </div>
@@ -98,35 +100,31 @@ export default {
 }
 </script>
 <style>
+.input-field.col label {
+  margin-top: -8px !important;
+}
+.row .col.s12{
+  width: 45%;
+  float: left;
+}
 .box-container-button{
   display: inline-block;
+  margin: 1px;
 }
 .material-icons{
 	cursor: pointer;
 }
-.add, .clean, .done, .delete {  
-  font-weight: bold;
-}
-.add, .done {
-	font-size: 2.6em;
-  color: #CDDC39;
-}
-.clean {
-	font-size: 2.2em;
-	color: #00BCD4
-}
-.delete {
-	font-size: 2.6em;
-	color: #797373db;
-}
 .box-list {
-	width: 60%;
-	margin: 0% 20%;
+    width: 50%;
+    margin: 0% 5% 0% 45%;
 }
 .box-insert {
     border-radius: .4em !important;
-    width: 40% !important;
-    margin: 0% 30%;
+    width: 80% !important;
+    margin: 0% 10%;
+}
+.collapsible-header i {
+    margin-right: 0rem;
 }
 .col.s6 {
 	width: 100% !important;
@@ -135,8 +133,8 @@ export default {
     margin-top: 30px;
 }
 input {
-    border: .5px solid #03A9F4 !important;
-    border-radius: .4em !important;
+	border-radius: .4em !important;
+    border: .5px solid #1c77c3  !important;
     width: 100% !important;
     margin: 0% !important;
     padding: 0em .5em !important;
@@ -147,8 +145,13 @@ input {
 select {
 	float: left;
     margin: 0em .2em;
-	border-color: #26a69a;
+	border-radius: .4em;
+	border-color: #1c77c3 ;
+	color: #9e9e9e;
 	width: 48%;
+}
+input:active{
+	background: red	
 }
 @media(max-width: 600px){
 	.box-list {

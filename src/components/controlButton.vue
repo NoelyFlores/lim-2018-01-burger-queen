@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <a class="waves-effect waves-light btn-large" @click="viewType('break')">Desayuno</a>
-    <a class="waves-effect waves-light btn-large" @click="viewType('lunch')">Almuerzo</a>
-    <a class="waves-effect waves-light btn-large" @click="viewType('dinner')">Cena</a>
-	<span class="badge"><h5>Mesa {{numTable}}</h5></span>
+    <a class="waves-effect waves-light btn-large request" @click="viewType('break')">Desayuno</a>
+    <a class="waves-effect waves-light btn-large request" @click="viewType('lunch')">Almuerzo</a>
+    <a class="waves-effect waves-light btn-large request" @click="viewType('dinner')">Cena</a>
+<span class="badge"><h5>M{{numTable}}</h5></span>
   </div>
 </template>
 <script>
@@ -38,10 +38,19 @@ export default {
     margin-top: 20px;
 }
 span.badge {
-  position: absolute;  
-  margin-left: 10% !important;
+    position: fixed;
+    margin-top: 48%;
+    margin-left: -100px;
+    z-index: 1;
+    bottom: 115px;
 }
 h5 {
-  color: #E91E63;
+    color: #fff;
+    border-radius: 100%;
+    background: #ffc200;
+    padding: 4em;
+}
+.request{
+	width: 30% !important;
 }
 </style>
