@@ -92,4 +92,11 @@ export default {
     width: 45% !important;
     float: left;
 }
+@media(max-width: 720px){
+  .collapsible {
+    width: 90% !important;
+    margin: 0% 5% !important;
+    float: none;
+    }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="row content">
 <a v-for="(item, index) in items" :key="item" class="waves-effect waves-light btn-large request" @click="viewAdmin(item)">{{index}}</a>
 <!-- <a class="waves-effect waves-light btn-large" @click="insertFood()">Angregar Comida</a>
 <a class="waves-effect waves-light btn-large" @click="insertTable()">Agregar Mesa</a> -->
@@ -52,6 +52,9 @@ export default {
 </script>
 <style scoped>
 .row {
-    margin-top: 20px;
+    margin-top: 20px;	
 	}
+.local{
+  margin-top: 0px !important;
+}
 </style>

@@ -41,6 +41,7 @@ export default {
 .box-list {
     width: 50%;
     margin: 0% 5% 0% 45%;
+		margin-top: -70px !important;
 }
 .input-field.col label {
   margin-top: -8px !important;
@@ -89,14 +90,43 @@ select {
 input:active{
 	background: red	
 }
+
+.collapsible {
+  border-top: none !important;
+	border-right: none !important;
+	border-left: none !important;
+	box-shadow: none !important;
+	height: 500px;
+    overflow: overlay;
+	}
 @media(max-width: 600px){
 	.box-list {
 	width: 100%;
 	margin: 0% 0%;
-}
+	}
+	.collapsible{
+		overflow: inherit
+	}
   .collapsible-header {
    padding: 1rem 0em !important;
   }
+	.row .col.s12{
+    float: none;
+		width: 100%;
+		margin-top: 9px;
+	}
+	input{
+		padding: 0em !important
+	}
+	.title {
+    width: 100% !important;
+    margin: 0%;
+	}
+	.title h5{
+    margin: 0rem 0 0rem -60% !important;
+		font-size: 12px;
+		padding: 4px 20px;
+	}
 }
 
 @media(max-width: 480px){
@@ -107,6 +137,7 @@ input:active{
 	  width: 100% !important;
     margin: 0% 0%;
   }	
+	
 }
 
 </style>

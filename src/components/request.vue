@@ -159,4 +159,10 @@ tr {
   font-weight: bold;
   color: #8bc34a;
 }
+@media(max-width: 720px){
+  table {
+    width: 90% !important;
+    margin: 0% 5% !important;
+  }
+}
 </style>

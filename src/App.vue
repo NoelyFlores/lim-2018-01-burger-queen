@@ -65,6 +65,9 @@ export default {
 }
 nav {
   background-color: #1C77C3 !important;
+  position: fixed;
+  top: 0%;
+  z-index: 2;
 }
 nav i.material-icons {
     margin-right: 10px;
@@ -114,6 +117,9 @@ footer{
   width: 100%;
   background: #8080806e;
 }
+.content {
+  margin-top: 70px !important;
+}
 @media only screen and (max-width: 992px){
   .hide-on-med-and-down {
       display: block !important;
@@ -121,10 +127,28 @@ footer{
   nav .brand-logo {
     left: 20%;
   }
+  label{
+    font-size: 16px !important;
+  }
 }
 @media (max-width: 750px) {
   nav .brand-logo {
     display: none
+  }
+
+}
+@media (max-width: 480px) {
+  label{
+    font-size: 14px !important;
+  }
+  .btn, .btn-large {
+    text-transform: lowercase;
+    padding: 0%;
+    width: 33% !important;
+    margin: .1%;
+  }
+  .titletwo h5 {
+    margin: 0rem 0 0rem -65% !important;
   }
 }
 </style>

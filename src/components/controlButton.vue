@@ -56,4 +56,15 @@ h5 {
 	width: 30% !important;
 	margin: 0px 3px;
 }
+@media (max-width: 480px){
+	h5{
+			padding: 3em;
+	}
+	span.badge{
+    margin-left: -111px;
+    bottom: 90px;
+	}
+}
+
+
 </style>

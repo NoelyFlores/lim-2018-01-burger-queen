@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="content">
 <button-control :numTable="numTable"></button-control>
 <div class= "title">
 <h5>{{typeLanguaje}}</h5>	

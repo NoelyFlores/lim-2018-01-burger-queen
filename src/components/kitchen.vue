@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
+  <div class="row content">
 		<div class= "titletwo">
-			<h5>Insertar Mesas</h5>	
+			<h5>Lista de Mesas</h5>	
 		</div>
     <div v-for ='item in items' :key ='item.uid' class="col s12 m6"  v-bind:class="[item.state]">
       <div class="card blue-grey darken-1">
@@ -100,5 +100,14 @@ export default {
 	.row .col.m6 {
     width: 33.3%
   }
+}
+@media (max-width: 720px){
+	.row .col.m6 {
+			width: 90%;
+			margin: 0% 5%;
+	}
+	.titletwo {
+    width: 100% !important;
+		}
 }
 </style>

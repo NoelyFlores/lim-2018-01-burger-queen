@@ -80,17 +80,13 @@ form p{
   width: 100%;
 	height: 50px;
 }
-.collapsible {
-  border-top: none !important;
-	border-right: none !important;
-	border-left: none !important;
-	box-shadow: none !important;
-	height: 500px;
-  overflow: scroll;
-	}
-@media (max-width: 480px){
+
+@media (max-width: 720px){
 	.box-container-txt {
-			width: 75%;
+		width: 75%;
+	}
+	.collapsible {
+		height: auto;
 	}
 }
 </style>

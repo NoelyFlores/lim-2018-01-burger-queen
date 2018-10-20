@@ -42,7 +42,7 @@ export default {
 <style scoped>
 	.collection {
 			height: 180px;
-			overflow: scroll;
+			overflow: auto;
 	}
 	.collection .collection-item {
     line-height: 1rem;

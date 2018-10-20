@@ -1,5 +1,5 @@
 <template>
-	<ul class="collapsible">
+	<ul class="collapsible content local">
 		<li v-for ='item in items' :key ='item.uid' class="collection-item">
 			<div class="collapsible-header" v-bind:class="[item.state]">
 				<div v-if="dataOption =='food'">
