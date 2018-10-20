@@ -9,7 +9,7 @@
 import {EventBus} from "@/plugin/bus.js"
 import titleButton from '@/plugin/titles.js'
 export default {
-	name:'button',
+	name: 'button',
 	props: ['numTable'],
 	data(){
 		return {
@@ -50,7 +50,7 @@ h5 {
     color: #fff;
     border-radius: 100%;
     background: #ffc200;
-    padding: 4em;
+    padding: 3.8em;
 }
 .request{
 	width: 30% !important;

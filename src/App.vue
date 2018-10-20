@@ -4,7 +4,7 @@
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo"><i class="material-icons">local_dining</i>Burger Queen</a>
           <ul class="right hide-on-med-and-down">
-            <li><router-link to="/home"><i class="material-icons">assignment_turned_in</i></router-link></li>
+            <li><router-link to="/"><i class="material-icons">assignment_turned_in</i></router-link></li>
             <li><router-link to="/kitchen"><i class="material-icons">restaurant</i></router-link></li>
             <li><router-link to="/admin"><i class="material-icons">assignment_ind</i></router-link></li>
             <li><a href="collapsible.html"><i class="material-icons">more_vert</i></a></li>
@@ -95,7 +95,7 @@ nav ul a {
     line-height: 35px !important;
     margin: 0% 3px;
   }
-  .btn, .btn-large:hover{
+  .btn-large:hover{
     border: 1px solid #FFC200 !important;
     background: #FFC200 !important;
   }

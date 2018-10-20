@@ -11,7 +11,13 @@
 				<span class="badge">
 					<div v-if="dataOption == 'food'" class="optionFood">
 						<span class="badge">S/. {{item.price}}.00</span>
-						<i @click="edit(item.uid)" class="material-icons add">edit</i>
+						<i @click="edit({
+							id:item.uid,
+							ctg:item.category,
+							ty:item.type,
+							name:item.value,
+							pr:item.price})"
+							class="material-icons add">edit</i>
 					</div>
 					<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
 					<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
@@ -23,12 +29,12 @@
 			<label class="process">Proceso</label>
 			<label class="libre">Desocupado</label>
 		</span>
-		<router-view/>
 	</ul>
 </template>
 <script>
 /* eslint-disable */ 
 import firebase from 'firebase'
+import {EventBus} from '@/plugin/bus.js'
 export default {
 	name:'client',
 	props: ['dataOption'],
@@ -59,7 +65,10 @@ export default {
 			})
 		},
 		deleteTable(uid, db){
-		  firebase.database().ref(db+'/' + uid).remove()
+		  firebase.database().ref(db +'/' + uid).remove()
+		},
+		edit(items){
+			EventBus.$emit('data-edit', items)
 		}
 	},
 	components:{}
