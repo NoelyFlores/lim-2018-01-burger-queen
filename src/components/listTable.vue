@@ -1,35 +1,35 @@
 <template>
-	<ul class="collapsible content local">
-		<li v-for ='item in items' :key ='item.uid' class="collection-item">
-			<div class="collapsible-header" v-bind:class="[item.state]">
-				<div v-if="dataOption =='food'">
-				<label>{{item.category}}</label>
-				<label>{{item.type}}</label>
-				</div>
-				<label v-if="alternative == 'table'">Mesa</label>
-				<label>{{item.value}}</label>
-				<span class="badge">
-					<div v-if="dataOption == 'food'" class="optionFood">
-						<span class="badge">S/. {{item.price}}.00</span>
-						<i @click="edit({
-							id:item.uid,
-							ctg:item.category,
-							ty:item.type,
-							name:item.value,
-							pr:item.price})"
-							class="material-icons add">edit</i>
-					</div>
-					<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
-					<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
-				</span>
-			</div>
-		</li>
-		<span v-if="alternative == 'table'" class= "badge">
-			<label class="active">ocupado</label>
-			<label class="process">Proceso</label>
-			<label class="libre">Desocupado</label>
-		</span>
-	</ul>
+<ul class="collapsible content local">
+<li v-for ='item in items' :key ='item.uid' class="collection-item">
+<div class="collapsible-header" v-bind:class="[item.state]">
+<div v-if="dataOption =='food'">
+<label>{{item.category}}</label>
+<label>{{item.type}}</label>
+</div>
+<label v-if="alternative == 'table'">Mesa</label>
+<label>{{item.value}}</label>
+<span class="badge">
+<div v-if="dataOption == 'food'" class="optionFood">
+<span class="badge">S/. {{item.price}}.00</span>
+<i @click="edit({
+id:item.uid,
+ctg:item.category,
+ty:item.type,
+name:item.value,
+pr:item.price})"
+class="material-icons add">edit</i>
+</div>
+<i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
+<i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
+</span>
+</div>
+</li>
+<span v-if="alternative == 'table'" class= "badge">
+<label class="active">ocupado</label>
+<label class="process">Proceso</label>
+<label class="libre">Desocupado</label>
+</span>
+</ul>
 </template>
 <script>
 /* eslint-disable */ 
@@ -44,7 +44,7 @@ export default {
       color: '',
 			state: false,
 			stateView: 'food',
-			alternative: this.dataOption?this.dataOption:'table'
+			alternative: this.dataOption?this.dataOption:'table' // por defecto muestra la tabla para mesas
     }
 	},
 	created(){
@@ -53,12 +53,13 @@ export default {
 	watch: {
 		dataOption: function (newVal, oldValue) {
 			this.stateView = newVal
+			// berifica el estado de la informacion que va mostrar
 		}
 	},
 	computed:{},
 	methods:{
 		connection (db) {
-			// muestra la informacion de las mesas de forma automatica 
+			// por defecto informacion de las mesas
 			let tablesData = firebase.database().ref().child(db?db:'table')		
 			tablesData.on('value', data => {
 				this.items = data.val()				
@@ -68,6 +69,7 @@ export default {
 		  firebase.database().ref(db +'/' + uid).remove()
 		},
 		edit(items){
+			// emito evento a foodFrom
 			EventBus.$emit('data-edit', items)
 		}
 	},

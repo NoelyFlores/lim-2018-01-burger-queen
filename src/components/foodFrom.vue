@@ -59,6 +59,7 @@ export default {
 		}
 	},
 	created(){
+		// recibo evento de listTable
 		EventBus.$on('data-edit', value => {
 			this.data = value
 			this.txtfood = this.data.name
@@ -85,6 +86,7 @@ export default {
 				const number = (parseInt(this.price) + 1)
 				let newKey = firebase.database().ref().child('food').push().key;				
 				if(number >= 1){
+					// condicion si me permte agregar o modificar
 					if(type === 'AGREGAR'){
 					firebase.database()
 					.ref('food/' + newKey)
@@ -95,6 +97,7 @@ export default {
 						.update({value:this.txtfood, type: this.type, category: this.category,queantity:this.queantity,price: num})
 						this.nameButton = 'AGREGAR'
 					}
+					// limpia los inputs
 					this.clean()
 				}else{			
 					this.message='Not number'

@@ -7,7 +7,7 @@
             <li><router-link to="/"><i class="material-icons">assignment_turned_in</i></router-link></li>
             <li><router-link to="/kitchen"><i class="material-icons">restaurant</i></router-link></li>
             <li><router-link to="/admin"><i class="material-icons">assignment_ind</i></router-link></li>
-            <li><a href="collapsible.html"><i class="material-icons">more_vert</i></a></li>
+            <li><a href="#"><i class="material-icons">more_vert</i></a></li>
           </ul>
         </div>
       </nav>
@@ -16,14 +16,13 @@
       <div class="footer-copyright">
         <div class="container">
           © 2018 Copyrigh Noely FC
-          <a class="grey-text text-lighten-4 right" href="#!">H♥</a>
         </div>
       </div>
     </footer>
   </div>
 </template>
-
 <script>
+/* eslint-disable */ 
 export default {
   name: 'App'
 }
@@ -37,14 +36,14 @@ export default {
 .add {
   color: #CDDC39;
 }
-.clean {  
+.clean {
   color: #ffc200
 }
 .delete{
  color:#1C77C3;
 }
 .title{
-	width: 90% !important;
+  width: 90% !important;
 	margin: 0% 5% 2.5%;
 	border-bottom: .5px solid #8BC34A;
 }

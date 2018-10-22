@@ -1,8 +1,6 @@
 <template>
 <div class="row content">
 <a v-for="(item, index) in items" :key="item" class="waves-effect waves-light btn-large request" @click="viewAdmin(item)">{{index}}</a>
-<!-- <a class="waves-effect waves-light btn-large" @click="insertFood()">Angregar Comida</a>
-<a class="waves-effect waves-light btn-large" @click="insertTable()">Agregar Mesa</a> -->
 <div v-if="view == false">
 <list-food></list-food>
 </div>
@@ -26,6 +24,7 @@ export default {
 		}
 	},
 	created(){
+		// nombre de botones segun el admin y employed js
 		Object.keys(titleButton).map(element => {
 			if(element === 'admin'){
 				this.items = titleButton[element]

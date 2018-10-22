@@ -7,7 +7,7 @@ import kitchen from '@/components/kitchen'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '*',
@@ -20,10 +20,13 @@ export default new Router({
     {
       path: '/home',
       name: 'client',
-      component: listTable
+      component: listTable,
+      meta: {
+        requiresTable: true
+      }
     },
     {
-      path: '/order',
+      path: '/order/:userId/:num',
       name: 'order',
       component: order
     },
@@ -38,11 +41,5 @@ export default new Router({
       component: kitchen
     }
   ]
-/*   scrollBehavior (to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
-    }
-  } */
 })
+export default router

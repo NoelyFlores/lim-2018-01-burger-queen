@@ -1,8 +1,8 @@
 <template>
   <div class="row content">
-		<div class= "titletwo">
-			<h5>Lista de Mesas</h5>	
-		</div>
+<div class= "titletwo">
+      <h5>Lista de Mesas</h5>
+    </div>
     <div v-for ='item in items' :key ='item.uid' class="col s12 m6"  v-bind:class="[item.state]">
       <div class="card blue-grey darken-1">
         <div class="card-content black-text">
@@ -10,7 +10,6 @@
           <wait-list :uid="item.uid"></wait-list>
         </div>
         <div class="card-action">
-          <a @click="cancel()">CANCELAR</a>
           <a @click="changeState(item.uid)">SERVIDO</a>
         </div>
       </div>
@@ -37,18 +36,15 @@ export default {
 	computed:{},
 	methods:{
 		connection() {
+			// lista de mesas
 			firebase.database().ref().child('table')		
 			.on('value', data => {
 				this.items = data.val()
 			})
 		},
 		changeState(uidTable) {
-		// cambiar el estado de la mesa a servido u ocupado!!!
+		// cambiar el estado de la mesa a ocupado!!!
 		firebase.database().ref('table/'+uidTable).update({state:'ocupado'})
-		this.crossOut = true
-		},
-		cancel(){
-			EventBus.$emit('cancel-order', true)
 		}
   },
   components: {'wait-list': waitList}

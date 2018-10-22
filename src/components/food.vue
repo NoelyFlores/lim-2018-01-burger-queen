@@ -1,8 +1,8 @@
 <template>
 <div class="row">
 <div class= "title">
-<h5>Insertar Comida</h5>	
-</div>	
+<h5>Insertar Comida</h5>
+</div>
 <form class="col s12">
 <food-form/>
 </form>

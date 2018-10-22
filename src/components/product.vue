@@ -23,8 +23,6 @@ export default {
   data(){
     return {
       items: [],
-      color: '',
-      hide:false
     };
   },
   created () {
@@ -49,43 +47,16 @@ export default {
       .set({food: uid})
       .then(data => {
         firebase.database().ref('table/'+this.dataView.userId).update({state:'pendiente'})
-        EventBus.$emit('ask-food', { uid:this.dataView.userId })
       })
-    },
-    comprovar () {
-      firebase
-        .database()
-        .ref()
-        .child('table/'+this.dataView.userId+'/person')
-        .on('value', data => {
-          const platos = data.val()
-          // si este id esta en la lista no agregar punto!!!!
-        })
     }
   },
   components: {}
 }
 </script>
 <style scoped>
-.hide {
-  background: red
-}
-.color {
-  background-color: #babebe75;
-}
-.color label {
-  text-decoration: line-through;
-  color: #6a6c6d;
-}
+
 .c-white {
   background-color: white;
-}
-.material-icons input {
-  width: 70% !important;
-  background: red !important;
-}
-#edit {
-  background: blue;
 }
 .collapsible {
     margin: 0rem 1.5% 1rem 3.5% !important;

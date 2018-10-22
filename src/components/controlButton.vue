@@ -28,6 +28,7 @@ export default {
 	computed:{
 	},
 	methods:{
+		// emito un evento al componente content *padre
 		viewType(value) {
 		EventBus.$emit('select-type', value)
 		}

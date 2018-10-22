@@ -2,7 +2,7 @@
 <div class="content">
 <button-control :numTable="numTable"></button-control>
 <div class= "title">
-<h5>{{typeLanguaje}}</h5>	
+<h5>{{typeLanguaje}}</h5>
 </div>
 <product-food :dataView="{type:type, userId:uidTable}"></product-food>
 <request-list :uidTable="uidTable"></request-list>
@@ -26,9 +26,10 @@ export default {
 		}
 	},
 	created(){
-	EventBus.$on("select-type", val => {
-      this.type = val;
-    })	
+		// recibo del componente controlButton
+		EventBus.$on('select-type', val => {
+		this.type = val;
+		})	
 	},
   	beforeDestroy(){
      EventBus.$off()

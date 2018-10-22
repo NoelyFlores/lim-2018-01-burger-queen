@@ -19,12 +19,14 @@ export default {
 	},
 	methods:{
 		connection() {
+			// Obtengo la lista de pedidos
 			firebase.database().ref().child('table/'+this.uid+'/person')			
 			.on('value', data => {
 				const arr = data.val()
 				if(arr !== null ){
 					const temp = []
 					Object.keys(arr).map(data => {
+						// por cada pedido accedo a la informacion
 						firebase.database().ref().child('food/'+ arr[data].food)
             .on('value', food => {
               temp.push(food.val())  

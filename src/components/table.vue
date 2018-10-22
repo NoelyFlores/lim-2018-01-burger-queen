@@ -1,7 +1,7 @@
 <template>
 <div class="row">
 <div class= "title">
-<h5>Insertar Mesas</h5>	
+<h5>Insertar Mesas</h5>
 </div>
 <form class="col s12">
 <div class="box-insert">
@@ -11,12 +11,11 @@
 </div>
 <div class="box-container-button">
 <span @click="insert()" ><i class="material-icons add">add</i></span>
-<span @click="clean()"><i class="material-icons clean">replay</i></span>
 </div>
 </div>
 </form>
 <div class="box-list">
-<list-mesa :dataView="table"></list-mesa>
+<list-mesa dataView="table"></list-mesa>
 </div>
 </div>
 </template>
@@ -30,39 +29,26 @@ export default {
 	data(){
 		return {
 			txtNumber: '',
-            message: '',
-            table: 'table'
+      message: '',
 		}
 	},
-	created(){
-
-	},
-	watch: {
-
-	},
-	computed:{
-
-	},
+	created(){},
+	watch: {},
+	computed:{},
 	methods:{
 		insert(){
 			if(this.txtNumber !== ''){
 				const num = parseInt(this.txtNumber)
 				let newKey = firebase.database().ref().child('table').push().key;
-				
-				const type = (parseInt(this.txtNumber) + 1)			
-				console.log(typeof type);	
-				if(type >= 1){
-					console.log('si')
+				if((parseInt(this.txtNumber) + 1) >= 1){
 					firebase.database().ref('table/' + newKey).set({value:num, state: 'desocupado', uid:newKey})
 					this.message = ''
 					this.txtNumber = ''
-			}else{				
-				console.log('no');
-				
+				}else{				
 					this.message='Not number'
-			}
+				}
 			}else{
-					this.message='Insert a number of table'
+				this.message='Insert a number of table'
 			}
 		}
 	},
