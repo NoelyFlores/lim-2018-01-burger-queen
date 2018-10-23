@@ -29,6 +29,11 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'Arvo';
+  font-display: auto;
+  src: local('Arvo'), url(https://noelyflores.github.io/lim-2018-01-burger-queen/#/home) format('woff2');
+}
 .add, .clean, .done {  
   font-weight: bold;
   font-size: 2.6em;
