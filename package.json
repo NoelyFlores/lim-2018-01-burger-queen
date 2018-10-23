@@ -17,6 +17,7 @@
     "deploy": "npm run build && push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "@vue/cli-plugin-pwa": "^3.0.5",
     "firebase": "^5.5.3",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
