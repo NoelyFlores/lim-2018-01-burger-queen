@@ -1,7 +1,7 @@
 <template>
 <ul class="collapsible content local">
 <li v-for ='item in items' :key ='item.uid' class="collection-item">
-<div class="collapsible-header" v-bind:class="[item.state]">
+<div class="collapsible-header">
 <div v-if="dataOption =='food'">
 <label>{{item.category}}</label>
 <label>{{item.type}}</label>
@@ -19,16 +19,12 @@ name:item.value,
 pr:item.price})"
 class="material-icons add">edit</i>
 </div>
+<label v-if="alternative == 'table'" v-bind:class="[item.state]" >{{item.state}}</label>
 <i v-if="alternative == 'table'" class="material-icons add" exact><router-link :to="{ name: 'order', params: { userId: item.uid, num: item.value }}">add</router-link></i>
 <i @click="deleteTable(item.uid, dataOption?dataOption:'table')" class="material-icons delete">delete</i>
 </span>
 </div>
 </li>
-<span v-if="alternative == 'table'" class= "badge">
-<label class="active">ocupado</label>
-<label class="process">Proceso</label>
-<label class="libre">Desocupado</label>
-</span>
 </ul>
 </template>
 <script>
@@ -84,15 +80,6 @@ span.badge {
 	float: none;
 	color: #b1a9aa;
 }
-	.active{
-		color: #8bc34aa3;
-	}
-	.process{
-		color: #FFEB3B
-	}
-	.libre{
-		color: #6a6c6d
-	}
 	.c-white {
 		background-color: white
 	}
@@ -100,19 +87,23 @@ span.badge {
 		width: 70% !important;
 	}
 	.router-link-active {
-    color: #FFC200;
+    	color: #FFC200;
+	}
+	.pendiente, .ocupado, .desocupado{		
+    	padding: .2em .5em;
+	}
+	.pendiente, .ocupado{		
+    	color: #fff !important;
 	}
 	.pendiente{
-	  background: #ffeb3b63;
-    color: #8c8787 !important;
+	  background:#ffc200;
 	}
 	.ocupado{
-    background: #8bc34aa3;
-    color: #fff !important;
+ 	  background: #8BC34A;
 	}
 	.desocupado{
 	  background: #fff;
-	  color: #8c8787 !important
+	  color: #8c8787 !important;
 	}
 </style>
 

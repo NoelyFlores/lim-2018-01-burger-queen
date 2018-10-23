@@ -44,7 +44,7 @@ export default {
 .clean {
   color: #ffc200
 }
-.delete{
+.done, .delete, .btn, .btn-large{
  color:#1C77C3;
 }
 .title{
@@ -80,11 +80,7 @@ nav ul a {
   padding: 0 20px !important;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
   nav .brand-logo {
     font-size: 1.5rem !important;
@@ -94,7 +90,6 @@ nav ul a {
     text-shadow: 0 0 8px #03A9F4;
   }
   .btn, .btn-large {
-    color: #1C77C3 !important;
     border: 1px solid #1C77C3 !important;
     background: #fff !important;    
     width: 30% !important;
@@ -112,9 +107,6 @@ nav ul a {
     margin: 0em .2em;
     color: #575757;
 }
-.done[data-v-4ce970e2] {
-    color: #1C77C3;
-}
 footer{
   bottom: 0% !important;
   position: fixed;
@@ -122,7 +114,7 @@ footer{
   background: #8080806e;
 }
 .content {
-  margin-top: 70px !important;
+  margin-top: 80px !important;
 }
 @media only screen and (max-width: 992px){
   .hide-on-med-and-down {

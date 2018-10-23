@@ -87,10 +87,6 @@ select {
 	color: #9e9e9e;
 	width: 48%;
 }
-input:active{
-	background: red	
-}
-
 .collapsible {
   border-top: none !important;
 	border-right: none !important;
